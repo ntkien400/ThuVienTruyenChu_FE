@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row"> <!--Row 1-->
+    <div class="col-lg-3">
+      <h2>Category</h2>
+      <div class="category"> <!--Category-->
+        <dl>
+          <dd>Item 1</dd>
+          <dd>Item 2</dd>
+          <dd>Item 3</dd>
+          <dd>Item 4</dd>
+          <dd>Item 1</dd>
+          <dd>Item 2</dd>
+          <dd>Item 3</dd>
+          <dd>Item 4</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="carousel"> <!-- Carousel -->
+        <app-carousel></app-carousel>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <h2>News</h2>
+      <div class="news"> <!-- News -->
+      </div>
+    </div>
+  </div>
+  <div class="row"> <!--List book 1-->
+    <div class="container" style="margin-top: 70px;">
+      <h3 class="wrap-title">Truyện mới</h3>
+      <div class="row">
+        <div *ngFor="let book of listbooks" class="col-sm-4 p-2">
+          <app-book-card [book] = "book"></app-book-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"> <!--List book 2-->
+    <div class="container" style="margin-top: 70px;">
+      <h3 class="wrap-title">Truyện hoàn thành</h3>
+      <div class="row">
+        <div *ngFor="let book of listbooks" class="col-sm-4 p-2">
+          <app-book-card [book] = "book"></app-book-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

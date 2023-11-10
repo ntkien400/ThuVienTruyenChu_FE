@@ -1,0 +1,25 @@
+
+.book-content{
+    display: flex;
+    align-items: center;
+  }
+  .propImg{
+    width: 100px;
+    height: auto;
+  }
+  .card{
+    width: auto;
+  }
+  .card-body{
+    padding: 0;
+    padding-left: 20px;
+    padding-right: 10px;
+  }
+  .book-content a {
+    text-decoration: none;
+    color: black;
+  }
+  .book-content{
+    justify-content: space-between;
+    overflow: hidden;
+  }

@@ -1,0 +1,29 @@
+.navbar{
+    background-color: gold !important;
+}
+.navbar-nav .nav-link {
+    color: white;
+  }
+.navbar-brand{
+    color: white !important;
+}
+.btn-outline-success{
+    pointer-events: none;
+    display: inline-block;
+    background-color: rgb(109, 128, 0);
+    color: white;
+}
+.custom-search-form {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-control{
+    width: 500px;
+}
+.icon-image{
+    width: 45px;
+    height: auto;
+}

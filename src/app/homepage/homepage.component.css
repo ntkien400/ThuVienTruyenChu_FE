@@ -1,0 +1,18 @@
+.container{
+    max-width: 1250px;
+}
+.category{
+    position: relative;
+    top: -11px;
+    border: 1px solid #e6e6e6;
+    border-top: none;
+}
+.category dd{
+    float: left;
+    width: 50%;
+    height: 57px;
+    background: #f7f6f2;
+}
+.wrap-title{
+    border-bottom: 1px solid #666;
+}

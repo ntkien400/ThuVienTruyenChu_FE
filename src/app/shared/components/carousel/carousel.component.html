@@ -1,0 +1,5 @@
+<ngb-carousel *ngIf="images" class="carousel-fade">
+  <ng-template ngbSlide *ngFor="let image of images">
+    <img [src]="image" alt="Slide">
+  </ng-template>
+</ngb-carousel>
