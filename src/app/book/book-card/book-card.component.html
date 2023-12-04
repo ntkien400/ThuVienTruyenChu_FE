@@ -1,13 +1,13 @@
-<div class="card">
+<div class="card" [ngClass]="{'border-0': removeBorder}">
   <div class="book-content">
-    <img class="propImg" src="assets/images/1f8ea1af-de33-456d-a6bc-711d9516bb7c.jpg" alt="images">
+    <img (click)="navigateToBookDetail()" class="propImg" src="assets/images/1f8ea1af-de33-456d-a6bc-711d9516bb7c.jpg" alt="images">
     <div class="card-body">
-      <h4><a href="">{{book.Name}}</a></h4>
-      <p>{{book.Content | slice:0:65}}</p>
+      <h5><a (click)="navigateToBookDetail()">{{bookCard.bookTitle}}</a></h5>
+      <p>{{bookCard.bookSummary| slice:0:65}}</p>
       <div class="book-content book-link">
-        <a href="">{{book.Author}}</a>
-        <a href=""><i>{{book.Category}}</i></a>
+        <a href=""><img src="./assets/images/human-icon.svg" alt="human-icon" width="15">{{bookCard.authorName}}</a>
+        <a *ngIf="categories.length > 0"><i>{{categories[0].categoryName}}</i></a>
       </div>
     </div>
   </div>
-  </div>
+</div>

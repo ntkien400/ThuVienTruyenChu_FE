@@ -1,0 +1,77 @@
+<div class="book-detail-container">
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="book-detail"><!--Contain information of book-->
+        <div class="book-image">
+          <img src="./assets/images/1f8ea1af-de33-456d-a6bc-711d9516bb7c.jpg" alt="Book Image">
+        </div>
+        <div class="book-info">
+          <h2>{{bookDetails?.bookTitle}}</h2>
+          <div *ngIf="categories.length > 0">
+            <p>Thể loại</p>
+            <span *ngFor="let category of categories ">
+              <a><i>{{category.categoryName}}</i></a>
+            </span>
+          </div>
+          <p>Author: John Doe</p>
+          <p>
+          <a href="" class="btn btn-danger">Đọc truyện</a>
+          <a href="" class="btn btn-primary">Theo dõi</a>
+          </p>
+        </div>
+      </div>
+      <div class="book-navbar"><!--Contain tab summary, chapter and comments-->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab === 'summary'}" (click)="setActiveTab('summary')" data-toggle="tab">
+             Thông tin chi tiết
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab === 'chapter'}" (click)="setActiveTab('chapter')" data-toggle="tab">
+              Danh sách chương
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{'active': activeTab === 'comments'}" (click)="setActiveTab('comments')" data-toggle="tab">
+              Bình luận
+            </a>
+          </li>
+        </ul>
+      
+        <div class="tab-content">
+          <div class="tab-pane fade show active" [ngClass]="{'show active': activeTab === 'summary'}" id="summary">
+            <p>{{bookDetails?.bookSummary}}</p>
+          </div>
+          <div class="tab-pane fade" [ngClass]="{'show active': activeTab === 'chapter'}" id="chapter">
+            <div class="volume">
+              <h5>Danh sách chương</h5>
+              <router-outlet></router-outlet>
+              <ul *ngFor="let chapter of chapters">
+                <li><a (click)="navigateToChapter(chapter.chapterNumber)">{{chapter.chapterName}}</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab-pane fade" [ngClass]="{'show active': activeTab === 'comments'}" id="comments">
+            <p>Comments content goes here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 border">
+      <h3>Cung tac gia</h3>
+      <div *ngFor="let book of bookCard">
+        <app-book-card [bookCard]="book"></app-book-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

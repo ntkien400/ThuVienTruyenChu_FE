@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="box">
+        <p>Tình trạng</p>
+        <ul>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+        </ul>
+      </div>
+      <div class="box">
+        <p>Số chương</p>
+        <ul>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+        </ul>
+      </div>
+      <div class="box">
+        <p>Thể loại</p>
+        <ul>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+          <li>
+            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <h3>Bộ lọc</h3>
+      <div *ngFor="let book of listbooks">
+        <div class="card border-0">
+          <div class="book-content" style="border-bottom: 1px solid gray">
+            <img
+              class="propImg"
+              src="assets/images/1f8ea1af-de33-456d-a6bc-711d9516bb7c.jpg"
+              alt="images"
+            />
+            <div class="card-body">
+              <a class="book-name" [routerLink]="['/book-details', book.Id]">{{book.Name}}</a>
+              <div class="book-author">
+                <p>
+                  <img src="./assets/images/human-icon.svg" alt="human icon" />
+                  <a href="">{{ book.Author }}</a>
+                  <em>|</em>
+                  <span>Số chương</span>
+                  <em>|</em>
+                  <span>Tình trạng</span>
+                </p>
+                <p><a href="">{{ book.Category }}</a></p>
+                <p>{{ book.Content | slice : 0 : 65 }}</p>
+                <p style="color:#DDDDDD;"><img src="./assets/images/clock-icon.png" alt="clock icon" />00/00/2023</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

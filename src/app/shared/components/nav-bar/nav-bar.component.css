@@ -10,7 +10,7 @@
 .btn-outline-success{
     pointer-events: none;
     display: inline-block;
-    background-color: rgb(109, 128, 0);
+    background-color: #228B22;
     color: white;
 }
 .custom-search-form {
@@ -22,8 +22,4 @@
 }
 .form-control{
     width: 500px;
-}
-.icon-image{
-    width: 45px;
-    height: auto;
 }

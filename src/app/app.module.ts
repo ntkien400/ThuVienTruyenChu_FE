@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomepageModule } from './homepage/homepage.module';
 import { SharedModule } from './shared/shared.module';
+import { BookModule } from './book/book.module';
+import { RouterModule } from '@angular/router';
+import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ChapterModule } from './chapter/chapter.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     NgbModule,
     HomepageModule,
-    SharedModule
+    SharedModule,
+    BookModule,
+    UserModule,
+    ChapterModule,
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" (click)="setActiveTab('information')" [ngClass]="{'active': activeTab === 'information'}">
+            Thông tin cá nhân
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="setActiveTab('book-uploaded')" [ngClass]="{'active': activeTab === 'book-uploaded'}">
+            Truyện đã đăng
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="setActiveTab('upload-book')" [ngClass]="{'active': activeTab === 'upload-book'}">
+            Đăng truyện
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div *ngIf="activeTab === 'information'" class="information-tab">
+        <div class="user-data1">
+          <div class="user-avatar">
+            <img src="./assets/images/avatar-icon.png" alt="avatar">
+          </div>
+          <div class="user-info">
+            <h3>Username</h3>
+            <p>Lv1</p>
+            <p>Luyện khí sư</p>
+          </div>
+        </div>
+        <div class="user-data2">
+          <ul class="nav nav-tabs">
+            <li class="nav-item" [ngClass]="{'active': selectInfo === 'info'}" (click)="selectActive('info')">
+              <a class="user-nav-tab">
+                Thông tin cá nhân
+              </a>
+            </li>
+            <li class="nav-item" [ngClass]="{'active': selectInfo === 'avatar'}" (click)="selectActive('avatar')">
+              <a class="user-nav-tab">
+                Thay đổi avatar
+              </a>
+            </li>
+            <li class="nav-item" [ngClass]="{'active': selectInfo === 'password'}" (click)="selectActive('password')">
+              <a class="user-nav-tab">
+                Đổi mật khẩu
+              </a>
+            </li>
+          </ul>
+          <div *ngIf="selectInfo === 'info'" class="user-form">
+            <form>
+                <div class="form-group">
+                    <label class="col-sm-2" for="fullName">Họ tên</label>
+                    <input class="col-sm-8" type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2" for="email">Email:</label>
+                    <input class="col-sm-8" type="email" id="email" name="email" required>
+                </div>
+                <div class="col-sm-8 offset-sm-2">
+                  <button type="submit">Cập nhật</button>
+                </div>
+            </form>
+          </div>
+          <div *ngIf="selectInfo === 'avatar'">
+            <p>Thay đổi avatar</p>
+          </div>
+          <div *ngIf="selectInfo === 'password'" class="user-form">
+            <form>
+              <div class="form-group">
+                  <label class="col-sm-2" for="fullName">Mật khẩu hiện tại</label>
+                  <input class="col-sm-8" type="text" id="fullName" name="fullName" required>
+              </div>
+
+              <div class="form-group">
+                  <label class="col-sm-2" for="email">Mật khẩu mới</label>
+                  <input class="col-sm-8" type="text" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2" for="email">Xác nhận lại</label>
+                <input class="col-sm-8" type="text" id="email" name="email" required>
+            </div>
+              <div class="col-sm-8 offset-sm-2">
+                <button class="btn btn-default" type="submit">Cập nhật</button>
+              </div>
+          </form>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeTab === 'book-uploaded'">
+        
+      </div>
+      <div *ngIf="activeTab === 'upload-book'">
+        <h2>Đăng truyện</h2>
+        <div class="user-form">
+          <form>
+            <div class="form-group">
+                <label class="col-sm-2" for="fullName">Tên truyện</label>
+                <input class="col-sm-8" type="text" id="book-title" name="book-title" required>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2" for="email">Tác giả:</label>
+                <input class="col-sm-8" type="text" id="author" name="author" required>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2" for="email">Giới thiệu truyện</label>
+              <input class="col-sm-8" type="text" id="book-summary" name="book-summary" required>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2" for="email">Thể loại</label>
+            <input class="col-sm-8" type="checkbox" id="category" name="category" required>
+        </div>
+            <div class="col-sm-8 offset-sm-2">
+              <button type="submit">Đăng truyện</button>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
