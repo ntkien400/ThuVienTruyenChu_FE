@@ -12,6 +12,8 @@ import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ChapterModule } from './chapter/chapter.module';
 import { DatePipe } from '@angular/common';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './Authenticate/auth.guard';
 
 @NgModule({
   declarations: [
@@ -28,8 +30,15 @@ import { DatePipe } from '@angular/common';
     ChapterModule,
     RouterModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('accessToken'), // Function to retrieve the token from local storage
+        allowedDomains: ['localhost:7234'], // List of domains where the token should be sent
+        disallowedRoutes: [], // List of routes where the token should not be sent
+      },
+    }),
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

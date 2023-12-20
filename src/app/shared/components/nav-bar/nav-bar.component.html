@@ -10,7 +10,6 @@
           <a class="nav-link" [routerLink]="['/book-filter']">Bộ lọc</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/users']">Người dùng</a>
         </li>
       </ul>
       <form class="d-flex custom-search-form" role="search">
@@ -21,7 +20,9 @@
           </button>
         </div>
       </form>         
-      <button class="btn btn-outline-dark" (click)="openLoginModal()">Đăng nhập</button>
+      <a class="user" *ngIf="isAuthenticate" [routerLink]="['/users']">{{userInfo?.userName}}</a>
+      <button class="btn btn-outline-dark" *ngIf="!isAuthenticate" (click)="openLoginModal()">Đăng nhập</button>
+      <button class="btn btn-outline-dark" *ngIf="isAuthenticate == true">Đăng xuất</button>
       <app-login-signin *ngIf="isLoginModalOpen" (closeModalEvent)="closeLoginModal()"></app-login-signin>
     </div>
   </div>

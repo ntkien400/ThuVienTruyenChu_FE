@@ -5,7 +5,6 @@ export interface User{
     saltPassword: string;
     fullName: string;
     email: string;
-    isTokenValid: boolean;
     userLevelId: number;
 }
 
@@ -13,5 +12,5 @@ export interface ViewUser{
     userName: string;
     fullName: string;
     email: string;
-    userLevelId: number;
+    userLevelName: string;
 }

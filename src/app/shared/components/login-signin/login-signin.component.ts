@@ -41,6 +41,7 @@ export class LoginSigninComponent implements OnInit {
           localStorage.setItem("accessToken", accessToken);
           localStorage.setItem("refreshToken", refreshToken);
           this.invalidLogin = false;
+          this.authService.checkAuthenticate();
           this.closeModal();
           this.router.navigate(['/']);
         },

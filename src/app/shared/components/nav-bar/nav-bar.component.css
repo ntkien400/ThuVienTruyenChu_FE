@@ -23,3 +23,9 @@
 .form-control{
     width: 500px;
 }
+
+.user {
+    margin-right: 20px;
+    color: white;
+    text-decoration: none;
+}
