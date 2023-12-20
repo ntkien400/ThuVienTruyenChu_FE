@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
+  isLoginModalOpen = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  openLoginModal() {
+    console.log('Opening login modal');
+    this.isLoginModalOpen = true;
+  }
+
+  closeLoginModal() {
+    this.isLoginModalOpen = false;
+  }
 }

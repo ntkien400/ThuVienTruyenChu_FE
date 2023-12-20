@@ -1,22 +1,183 @@
-<div class="container">
+<div class="background">
+  <div class="container">
     <div class="content">
-        <div class="col-xs-12">
-            <h1>Truyen title</h1>
-            <h4>Chuong</h4>
-            <p>Nguoi dang</p>
-            <p>Ngay dang</p>
-            <div class="col-xs-12">
-                <div class="chapter">
-                    <ul class="control">
-                        <li class="list-control"></li>
-                        <li class="list-control"></li>
-                        <li class="list-control"></li>
-                    </ul>
-                    <div class="chapter-content">
+      <div class="col-xs-12">
+        <h1 style="color: brown;">{{book?.bookTitle}}</h1>
+        <p style="color: coral; font-weight: bold;">Chương {{chapter?.chapterNumber}}: {{chapter?.chapterName}}</p>
+        <p><strong>Người đăng: </strong>{{chapter?.userName}}</p>
+        <p><strong>Ngày đăng: </strong>{{chapter?.uploadTime}}</p>
+        <div class="chapter-c col-xs-12">
+          <div class="max-1000">
+            <div class="chapter" [ngStyle]="{'background-color': selectedTheme}">
+              <ul class="control">
+                <li class="list-control" [class.active]="showPanel === 'list'" (click)="togglePanel('list')" 
+                [ngStyle]="{'background-color': selectedTheme}">
+                  <i class="fa fa-list-ul"></i>
+                </li>
+                <li class="list-control" [class.active]="showPanel === 'config'" (click)="togglePanel('config')"
+                [ngStyle]="{'background-color': selectedTheme}">
+                  <i class="fa-solid fa-gear"></i>
+                </li>
+                <li class="list-control" [class.active]="showPanel === 'comment'" (click)="togglePanel('comment')"
+                [ngStyle]="{'background-color': selectedTheme}">
+                  <i class="fa-regular fa-comment-dots"></i>
+                </li>
+                <div class="control-content">
+                  <div *ngIf="showPanel === 'list'" class="panel-box">
+                    <!-- First Row: Buttons to Change Chapter -->
+                    <div class="row">
+                      <button class="change-chapter" (click)="changeChapter('prev')">
+                        <i class="fa-solid fa-arrow-left-long fa-lg"></i>
+                        Chương trước
+                      </button>
+                      <button class="change-chapter" (click)="changeChapter('next')">
+                        Chương sau
+                        <i class="fa-solid fa-arrow-right-long fa-lg"></i>
+                      </button>
                     </div>
+                    <h4>Danh sách chương</h4>
+                    <!-- Second Row: List of Chapters (2 per line) -->
+                    <div class="row chapter-list">
+                      <div class="chapter-text" *ngFor="let chapter of chapters">
+                        <!-- Display Chapter Information -->
+                        <p>Chương {{ chapter.chapterNumber }}: {{chapter.chapterName}}</p>
+                        <!-- Additional Chapter Details... -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="showPanel === 'config'" class="panel-box panel-setting">
+                    <div class="col-xs-12">
+                      <h5>Tuỳ chỉnh</h5>
+
+                      <!-- Theme -->
+                      <div class="box-row">
+                        <p>Màu nền</p>
+                        <div class="box-theme">
+                          <span class="round-box" *ngFor="let themeColor of themeColors"
+                            (click)="selectTheme(themeColor)" [ngClass]="{selected: selectedTheme === themeColor}"
+                            [ngStyle]="{'background-color': themeColor}">
+                            <i *ngIf="selectedTheme === themeColor" class="fa-solid fa-check" style="color: gold;"></i>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- Font -->
+                      <div class="box-row">
+                        <p>Kiểu chữ</p>
+                        <div class="box-font">
+                          <div class="font-option" *ngFor="let font of fonts" (click)="selectFont(font)"
+                            [ngClass]="{ selected: selectedFont === font }">
+                            {{font}}
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Font Size -->
+                      <div class="box-row">
+                        <p>Cỡ chữ</p>
+                        <div class="box-font-size">
+                          <button (click)="adjustFontSize(-2)">-</button>
+                          <span>{{ fontSize }}</span>
+                          <button (click)="adjustFontSize(2)">+</button>
+                        </div>
+                      </div>
+
+                      <!-- Line Spacing -->
+                      <div class="box-row">
+                        <p>Giãn dòng</p>
+                        <div class="box-line-spacing">
+                          <button (click)="adjustLineSpacing(-10)">-</button>
+                          <span>{{ lineSpacing }}%</span>
+                          <button (click)="adjustLineSpacing(10)">+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="showPanel === 'comment'" class="panel-box">
+                    <!-- Content for comment panel -->
+                    Comment Panel Content
+                  </div>
                 </div>
-                <div class="control-bottom"></div>
+              </ul>
+
+              <div class="chapter-content" [innerText]="chapter?.chapterContent"
+                [ngStyle]="{'line-height.%': lineSpacing, 'font-family': selectedFont, 'font-size.px': fontSize}">
+
+              </div>
             </div>
+            <div class="control-bottom">
+              <a class="prev-chapter"><i class="fa-solid fa-arrow-left-long fa-lg"></i> Chương trước
+              </a>
+              <span class="cross-line"></span>
+              <a class="next-chapter">Chương sau <i class="fa-solid fa-arrow-right-long fa-lg"></i></a>
+            </div>
+            <!--List Comment-->
+            <div class="list-comment">
+              <div class="comment-section">
+                <h3 class="comment-title">Bình luận truyện</h3>
+                <hr class="underline">
+
+                <!-- Comment Form -->
+                <div class="comment-post">
+                  <img class="image" src="./assets/images/avatar-icon.png" alt="">
+                  <div class="comment-form">
+                    <textarea placeholder="Write your comment"></textarea>
+                    <button type="submit">Bình luận</button>
+                  </div>
+                </div>
+
+                <!-- Comments -->
+                <div class="comments">
+                  <ul *ngFor="let comment of userComment">
+                    <li class="comment">
+                      <div class="user-photo">
+                        <a href=""><img src="./assets/images/avatar-icon.png" alt=""></a>
+                      </div>
+                      <div class="discuss">
+                        <a href=""><p>{{comment.user.fullName}}</p></a>
+                        <p>{{comment.commentContent}}</p>
+                        <p class="inline-element">
+                          <span class="inline-element" style="margin-right: 20px;">{{comment.commentedTime | date:'MMM dd, yyyy HH:mm a'}}</span>
+                          <a (click)="toggleContent()">
+                            <i class="fa-regular fa-comment-dots inline-element"></i>
+                            Trả lời
+                          </a>
+                        </p>
+
+                        <!-- Replies -->
+                        <div class="replies" [ngStyle]="{'display': showContent ? 'block' : 'none'}">
+                          <ul *ngFor="let reply of comment.replies">
+                            <li class="comment">
+                              <div class="user-photo">
+                                <a href=""><img src="./assets/images/avatar-icon.png" alt=""></a>
+                              </div>
+                              <div class="discuss">
+                                <a href=""><p>{{reply.user.fullName}}</p></a>
+                                <p>{{reply.replyContent}}</p>
+                                <p class="inline-element">
+                                  <span class="inline-element" style="margin-right: 20px;">{{reply.repliedTime | date:'MMM dd, yyyy HH:mm a'}}</span>
+                                </p>
+                              </div>
+                            </li>
+                          </ul>
+                          <!-- Reply Form -->
+                          <div class="reply-form">
+                            <!-- Your reply form elements go here -->
+                            <textarea placeholder="Write your reply"></textarea>
+                            <button type="submit">Bình luận</button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

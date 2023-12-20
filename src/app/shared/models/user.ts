@@ -8,3 +8,10 @@ export interface User{
     isTokenValid: boolean;
     userLevelId: number;
 }
+
+export interface ViewUser{
+    userName: string;
+    fullName: string;
+    email: string;
+    userLevelId: number;
+}

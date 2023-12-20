@@ -1,50 +1,62 @@
-.container{
+.container {
     padding-top: 50px;
 }
-.information-tab{
+
+.information-tab {
     margin: 20px 50px;
 }
-.nav-link{
+
+.nav-link {
     color: black;
 }
-.nav-link.active{
+
+.nav-link.active {
     color: white;
     background-color: gold;
     font-weight: bold;
 }
-.user-data1{
+
+.user-data1 {
     border: 1px solid #EBEBEB;
     border-radius: 4px;
     overflow: hidden;
     padding-top: 50px;
 }
-.user-avatar{
+
+.user-avatar {
     float: left;
     width: 15%;
 }
-.user-info{
+
+.user-info {
     float: left;
     width: 80%;
 }
-.user-data2{
+
+.user-data2 {
     margin-top: 20px;
     border: 1px solid #EBEBEB;
 }
-.user-data2 ul{
+
+.user-data2 ul {
     background-color: #F5F5F5;
 }
-.user-data2 ul li{
-    padding: 5px 10px 
+
+.user-data2 ul li {
+    padding: 5px 10px
 }
-.user-data2 ul li.active{
+
+.user-data2 ul li.active {
     background-color: white;
     border: 1px solid #EBEBEB;
     font-weight: bold;
 }
-.user-data2 ul li a{
+
+.user-data2 ul li a {
     color: black;
     text-decoration: none;
 }
+
 .user-form {
     margin: 0 auto;
     background-color: #fff;
@@ -65,7 +77,6 @@ label {
 
 input {
     display: inline-block;
-    width: 50%;
     box-sizing: border-box;
 }
 
@@ -73,7 +84,24 @@ button {
     background-color: #F5F5F5;
     padding: 6px 12px;
     color: black;
-    border: 1px solid #EBEBEB ;
+    border: 1px solid #EBEBEB;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.category-wrapper {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.category-wrapper:nth-child(4n) {
+    margin-right: 0;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.col-sm-8 {
+    margin-top: 10px;
 }

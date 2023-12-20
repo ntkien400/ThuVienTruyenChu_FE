@@ -24,7 +24,7 @@ export class HomepageComponent implements OnInit {
 
   loadNewBookCard(): void {
     const order = 'new';
-    this.bookService.getOrderBooks(order).subscribe(response => {
+    this.bookService.getFilterBooks(order).subscribe(response => {
       this.listNewBookCard = response.data.slice(0, 6);
       console.log(this.listNewBookCard);
     });
@@ -32,7 +32,7 @@ export class HomepageComponent implements OnInit {
 
   loadRecentBookCard(): void {
     const order = 'recent';
-    this.bookService.getOrderBooks(order).subscribe(response => {
+    this.bookService.getFilterBooks(order).subscribe(response => {
       this.listRecentBookCard = response.data.slice(0, 8);
     });
   }

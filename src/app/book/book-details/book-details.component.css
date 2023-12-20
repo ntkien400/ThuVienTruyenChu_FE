@@ -2,7 +2,7 @@ a {
   cursor: pointer;
 }
 .book-detail-container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
@@ -28,6 +28,12 @@ a {
 }
 .book-info p a {
   margin-right: 40px;
+}
+.book-info span {
+  margin-right: 10px;
+  padding: 0 5px;
+  border: 1px solid blue;
+  color: blue;
 }
 .book-navbar .nav-tabs .nav-item {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -60,4 +66,172 @@ a {
 .volume ul li{
   padding: 5px 0;
   border-bottom: 1px solid #f7f6f2;
+}
+.list-author-book {
+  margin-bottom: 10px;
+  padding: 0 5px;
+}
+.col-lg-3.border {
+  height: fit-content;
+}
+.col-lg-3.border h3 {
+  height: 40px;
+  padding: 0 10px;
+  background: #ccc;
+}
+::ng-deep app-book-card {
+  .card-body h5 {
+    font-size: 18px;
+  }
+  .book-content .book-link a:first-child {
+    display: none;
+  }
+}
+
+.inline-element {
+  display: inline-block;
+}
+
+.inline-element a:hover {
+  color: blue;
+}
+
+button {
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.list-comment {
+  width: 100%;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.comment-section {
+  padding: 20px;
+  background-color: white;
+}
+
+.comment-title {
+  text-align: left;
+  color: #333;
+}
+
+.underline {
+  border: 1px solid #333;
+  margin-top: 5px;
+}
+
+.comment-post {
+  display: flex;
+  justify-content:center;
+}
+
+.comment-form {
+  width: 85%;
+  margin: 0 25px 0 10px;
+}
+
+.image {
+  width: 8%;
+  height: max-content;
+}
+.comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comment-form button {
+  background-color: #228B22;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments {
+  margin: 20px 20px;
+}
+
+.comment {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+  padding: 15px;
+  position: relative;
+}
+
+.comment p {
+  margin: 0;
+  text-align: left;
+}
+
+.discuss{
+  width: 100%;
+}
+
+.discuss a p{
+  font-weight: bold;
+  color: #228B22;
+  font-size: 15px;
+}
+
+.discuss span,p.inline-element {
+  font-size: 12px;
+  color: #ccc;
+}
+.replies-toggle {
+  background-color: #ddd;
+  color: #333;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.replies {
+  display: none;
+  padding-left: 20px;
+}
+
+.reply {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.reply-form textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.reply-form button {
+  background-color: #228B22;
+  color: #fff;
+  padding: 5px 10px;
+  margin: 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.user-photo {
+  width: 50px;
+  height: 50px;
+}
+
+.user-photo img {
+  width: 100%;
+  height: 100%;
 }

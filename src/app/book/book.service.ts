@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponse, BookCard, BookDetail } from '../shared/models/book';
+import { BookCard, BookDetail } from '../shared/models/book';
 import { BookCategory } from '../shared/models/bookcategory';
 import { Category } from '../shared/models/category';
-import { Chapter } from '../shared/models/chapter';
+import { Chapter, ViewChapter } from '../shared/models/chapter';
+import { ApiResponse } from '../shared/models/apiresponse';
 
 @Injectable({
     providedIn: 'root'
@@ -35,11 +36,33 @@ export class BookService{
         return this.http.get<ApiResponse<Category[]>>(this.baseUrl + `Categories/get-all-category`);
     }
 
-    getOrderBooks(order: string): Observable<ApiResponse<BookCard[]>>{
-        return this.http.get<ApiResponse<BookCard[]>>(this.baseUrl + `Books/filter-books?order=${order}`);
+    getFilterBooks(order?: string, status?: string, chapter?: number, cate?: number): Observable<ApiResponse<BookDetail[]>>{
+        let params = new HttpParams();
+
+        if(order){
+            params = params.set('order', order);
+        }
+
+        if(status){
+            params = params.set('status', status);
+        }
+
+        if(chapter != undefined && chapter != null){
+            params = params.set('chapter', chapter.toString());
+        }
+
+        if(cate != undefined && cate != null){
+            params = params.set('cate', cate.toString());
+        }
+
+        return this.http.get<ApiResponse<BookDetail[]>>(this.baseUrl + `Books/filter-books`, {params});
     }
 
-    getChaptersByBook(bookId: number): Observable<ApiResponse<Chapter[]>>{
+    getAllChaptersByBook(bookId: number): Observable<ApiResponse<Chapter[]>>{
         return this.http.get<ApiResponse<Chapter[]>>(this.baseUrl + `Chapters/get-all-chapters-of-book/${bookId}`);
+    }
+
+    getChapterByBook(bookId: number, chapNumber: number): Observable<ApiResponse<ViewChapter>>{
+        return this.http.get<ApiResponse<ViewChapter>>(this.baseUrl + `Chapters/get-chapter-by-book?bookId=${bookId}&chapNumber=${chapNumber}`);
     }
 }

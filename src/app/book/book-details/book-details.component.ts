@@ -5,6 +5,8 @@ import { BookCard, BookDetail } from 'src/app/shared/models/book';
 import { Category } from 'src/app/shared/models/category';
 import { BookCategory } from 'src/app/shared/models/bookcategory';
 import { Chapter } from 'src/app/shared/models/chapter';
+import { ViewComment } from 'src/app/shared/models/usercomment';
+import { UserService } from 'src/app/user/user.service';
 
 @Component({
   selector: 'app-book-details',
@@ -19,9 +21,12 @@ export class BookDetailsComponent implements OnInit {
   categories: Category[] = [];
   chapters: Chapter[] = [];
   activeTab = 'summary';
-
+  showContent = false;
+  userComment: ViewComment[] = [];
+  
   constructor(
     private bookService: BookService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -31,6 +36,10 @@ export class BookDetailsComponent implements OnInit {
 
   setActiveTab(tab: string): void {
     this.activeTab = tab;
+  }
+
+  toggleContent(){
+    this.showContent = ! this.showContent;
   }
 
   getBookDetailInfo(): void {
@@ -47,6 +56,7 @@ export class BookDetailsComponent implements OnInit {
           })
           this.loadBookSameAuthor(this.bookDetails.authorId);
           this.loadChaptersOfBook(this.bookDetails.id);
+          this.loadCommentsOfBook(this.bookDetails.id);
         }
         else{
           this.router.navigate(['/not-found']);
@@ -76,7 +86,7 @@ export class BookDetailsComponent implements OnInit {
 
   loadChaptersOfBook(bookId: number): void{
     if(this.bookDetails){
-      this.bookService.getChaptersByBook(bookId).subscribe(response => {
+      this.bookService.getAllChaptersByBook(bookId).subscribe(response => {
         this.chapters = response.data;
         console.log(this.chapters);
       })
@@ -89,5 +99,12 @@ export class BookDetailsComponent implements OnInit {
       this.router.navigate(['/book-details/'+ bookTitleNormalize + '/chuong/' + chapterNumber]);
     }
     
+  }
+
+  loadCommentsOfBook(bookId: number): void{
+    this.userService.getUserCommentsByBook(bookId).subscribe(response => {
+      this.userComment = response.data;
+      console.log(this.userComment);
+    })
   }
 }

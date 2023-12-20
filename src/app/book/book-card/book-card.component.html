@@ -1,6 +1,6 @@
-<div class="card" [ngClass]="{'border-0': removeBorder}">
+<div class="card">
   <div class="book-content">
-    <img (click)="navigateToBookDetail()" class="propImg" src="assets/images/1f8ea1af-de33-456d-a6bc-711d9516bb7c.jpg" alt="images">
+    <img (click)="navigateToBookDetail()" class="propImg" src="{{bookCard.imageUrl}}" alt="images">
     <div class="card-body">
       <h5><a (click)="navigateToBookDetail()">{{bookCard.bookTitle}}</a></h5>
       <p>{{bookCard.bookSummary| slice:0:65}}</p>

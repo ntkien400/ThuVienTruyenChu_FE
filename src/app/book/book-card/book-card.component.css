@@ -1,43 +1,55 @@
-.book-content{
-    display: flex;
-    align-items: center;
-  }
-  .book-content img{
-    padding: 0;
-  }
-  .propImg{
-    width: 100px;
-    height: auto;
-  }
-  .card{
-    width: auto;
-  }
-  .card-body{
-    padding: 0;
-    padding-left: 20px;
-    padding-right: 10px;
-  }
-  .card-body p{
-    font-size: 13px;
-  }
-  .book-content a {
-    text-decoration: none;
-    color: black;
-  }
-  .book-content{
-    justify-content: space-between;
-  }
-  .book-content .book-link a{
-    color: #a6a6a6;
-    font-size: 13px;
-  }
-  .book-content .book-link a i{
-    border: 1px solid #a6a6a6 ;
-    padding: 2px 3px;
-  }
-  a {
-    cursor: pointer;
-  }
-  img {
-    cursor: pointer;
-  }
+.book-content {
+  display: flex;
+  align-items: center;
+}
+
+.book-content img {
+  padding: 0;
+}
+
+.propImg {
+  width: 100px;
+  height: auto;
+}
+
+.card {
+  border: none;
+  width: auto;
+}
+
+.card-body {
+  padding: 0;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.card-body p {
+  font-size: 13px;
+}
+
+.book-content a {
+  text-decoration: none;
+  color: black;
+}
+
+.book-content {
+  justify-content: space-between;
+}
+
+.book-content .book-link a {
+  color: #a6a6a6;
+  font-size: 13px;
+}
+
+.book-content .book-link a i {
+  border: 1px solid #a6a6a6;
+  padding: 2px 3px;
+}
+
+a {
+  cursor: pointer;
+}
+
+img {
+  cursor: pointer;
+}

@@ -3,17 +3,16 @@
     <div class="col-lg-9">
       <div class="book-detail"><!--Contain information of book-->
         <div class="book-image">
-          <img src="./assets/images/1f8ea1af-de33-456d-a6bc-711d9516bb7c.jpg" alt="Book Image">
+          <img src="{{bookDetails?.imageUrl}}" alt="Book Image">
         </div>
         <div class="book-info">
           <h2>{{bookDetails?.bookTitle}}</h2>
           <div *ngIf="categories.length > 0">
-            <p>Thể loại</p>
             <span *ngFor="let category of categories ">
               <a><i>{{category.categoryName}}</i></a>
             </span>
           </div>
-          <p>Author: John Doe</p>
+          <p>Tác giả: {{bookDetails?.authorName}}</p>
           <p>
           <a href="" class="btn btn-danger">Đọc truyện</a>
           <a href="" class="btn btn-primary">Theo dõi</a>
@@ -53,14 +52,74 @@
             </div>
           </div>
           <div class="tab-pane fade" [ngClass]="{'show active': activeTab === 'comments'}" id="comments">
-            <p>Comments content goes here</p>
+            <div class="list-comment">
+              <div class="comment-section">
+                <h3 class="comment-title">Bình luận truyện</h3>
+                <hr class="underline">
+
+                <!-- Comment Form -->
+                <div class="comment-post">
+                  <img class="image" src="./assets/images/avatar-icon.png" alt="">
+                  <div class="comment-form">
+                    <textarea placeholder="Write your comment"></textarea>
+                    <button type="submit">Bình luận</button>
+                  </div>
+                </div>
+
+                <!-- Comments -->
+                <div class="comments">
+                  <ul *ngFor="let comment of userComment">
+                    <li class="comment">
+                      <div class="user-photo">
+                        <a href=""><img src="./assets/images/avatar-icon.png" alt=""></a>
+                      </div>
+                      <div class="discuss">
+                        <a href=""><p>{{comment.user.fullName}}</p></a>
+                        <p>{{comment.commentContent}}</p>
+                        <p class="inline-element">
+                          <span class="inline-element" style="margin-right: 20px;">{{comment.commentedTime | date:'MMM dd, yyyy HH:mm a'}}</span>
+                          <a (click)="toggleContent()">
+                            <i class="fa-regular fa-comment-dots inline-element"></i>
+                            Trả lời
+                          </a>
+                        </p>
+
+                        <!-- Replies -->
+                        <div class="replies" [ngStyle]="{'display': showContent ? 'block' : 'none'}">
+                          <ul *ngFor="let reply of comment.replies">
+                            <li class="comment">
+                              <div class="user-photo">
+                                <a href=""><img src="./assets/images/avatar-icon.png" alt=""></a>
+                              </div>
+                              <div class="discuss">
+                                <a href=""><p>{{reply.user.fullName}}</p></a>
+                                <p>{{reply.replyContent}}</p>
+                                <p class="inline-element">
+                                  <span class="inline-element" style="margin-right: 20px;">{{reply.repliedTime | date:'MMM dd, yyyy HH:mm a'}}</span>
+                                </p>
+                              </div>
+                            </li>
+                          </ul>
+                          <!-- Reply Form -->
+                          <div class="reply-form">
+                            <!-- Your reply form elements go here -->
+                            <textarea placeholder="Write your reply"></textarea>
+                            <button type="submit">Trả lời</button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 border">
-      <h3>Cung tac gia</h3>
-      <div *ngFor="let book of bookCard">
+      <h3>Cùng tác giả</h3>
+      <div *ngFor="let book of bookCard" class="list-author-book">
         <app-book-card [bookCard]="book"></app-book-card>
       </div>
     </div>

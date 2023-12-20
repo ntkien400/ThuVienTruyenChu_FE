@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ChapterModule } from './chapter/chapter.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,9 @@ import { ChapterModule } from './chapter/chapter.module';
     UserModule,
     ChapterModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

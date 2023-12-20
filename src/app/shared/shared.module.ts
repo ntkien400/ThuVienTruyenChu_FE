@@ -5,22 +5,27 @@ import { CarouselComponent } from './components/carousel/carousel.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { LoginSigninComponent } from './components/login-signin/login-signin.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   declarations: [
     CarouselComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    LoginSigninComponent
   ],
   exports: [
     CarouselComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    LoginSigninComponent
   ]
 })
 export class SharedModule { }

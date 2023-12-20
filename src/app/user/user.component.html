@@ -9,7 +9,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="setActiveTab('book-uploaded')" [ngClass]="{'active': activeTab === 'book-uploaded'}">
-            Truyện đã đăng
+            Đăng chương
           </a>
         </li>
         <li class="nav-item">
@@ -28,7 +28,7 @@
             <img src="./assets/images/avatar-icon.png" alt="avatar">
           </div>
           <div class="user-info">
-            <h3>Username</h3>
+            <h3>Nguyễn Trung Kiên</h3>
             <p>Lv1</p>
             <p>Luyện khí sư</p>
           </div>
@@ -93,14 +93,34 @@
         </div>
       </div>
       <div *ngIf="activeTab === 'book-uploaded'">
-        
+        <h2>Đăng chương</h2>
+        <div class="user-form">
+          <form>
+            <div class="form-group">
+                <label class="col-sm-2" for="fullName">STT chương:</label>
+                <input class="col-sm-8" type="text" id="chapter-number" name="chapter-number" required>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2" for="email">Tên chương:</label>
+                <input class="col-sm-8" type="text" id="chapter-name" name="chapter-name" required>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2" for="email">Nội dung:</label>
+              <textarea class="form-control" id="chapter-content" name="chapter-content" rows="12" required></textarea>
+            </div>                
+            <div class="col-sm-8 offset-sm-2">
+              <button type="submit">Đăng chương</button>
+            </div>
+        </form>
+        </div>
       </div>
       <div *ngIf="activeTab === 'upload-book'">
         <h2>Đăng truyện</h2>
         <div class="user-form">
           <form>
             <div class="form-group">
-                <label class="col-sm-2" for="fullName">Tên truyện</label>
+                <label class="col-sm-2" for="fullName">Tên truyện:</label>
                 <input class="col-sm-8" type="text" id="book-title" name="book-title" required>
             </div>
 
@@ -109,13 +129,24 @@
                 <input class="col-sm-8" type="text" id="author" name="author" required>
             </div>
             <div class="form-group">
-              <label class="col-sm-2" for="email">Giới thiệu truyện</label>
+              <label class="col-sm-2" for="email">Giới thiệu truyện:</label>
               <input class="col-sm-8" type="text" id="book-summary" name="book-summary" required>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2" for="email">Thể loại</label>
-            <input class="col-sm-8" type="checkbox" id="category" name="category" required>
-        </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="email">Thể loại:</label>
+              <div class="col-sm-8">
+                <div class="row">
+                  <div *ngFor="let category of listCategories; let i = index" class="col-sm-3 category-wrapper">
+                    <input type="checkbox" id="category{{i}}" name="category">
+                    {{category.categoryName}}
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <div class="form-group">
+              <label class="col-sm-2" for="email">Hình ảnh:</label>
+              <input class="col-sm-8" type="file" id="book-image" name="book-image" required>
+            </div>                       
             <div class="col-sm-8 offset-sm-2">
               <button type="submit">Đăng truyện</button>
             </div>

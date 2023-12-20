@@ -2,16 +2,36 @@
   <div class="row">
     <div class="col-lg-3">
       <div class="box">
+        <p>Sắp xếp</p>
+        <ul>
+          <li>
+            <a (click)="selectOrder('all')" class="btn btn-outline-warning" 
+            [class.selected]="selectedOrder === undefined">Không sắp xếp</a>
+          </li>
+          <li>
+            <a (click)="selectOrder('new')" class="btn btn-outline-warning"
+            [class.selected]="selectedOrder === 'new'">Mới ra</a>
+          </li>
+          <li>
+            <a (click)="selectOrder('recent')" class="btn btn-outline-warning"
+            [class.selected]="selectedOrder === 'recent'">Mới cập nhật</a>
+          </li>
+        </ul>
+      </div>
+      <div class="box">
         <p>Tình trạng</p>
         <ul>
           <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+            <a (click)="selectStatus('all')" class="btn btn-outline-warning"
+            [class.selected]="selectedStatus === undefined">Toàn bộ</a>
           </li>
           <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+            <a (click)="selectStatus('completed')" class="btn btn-outline-warning"
+            [class.selected]="selectedStatus === 'completed'">Hoàn thành</a>
           </li>
           <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+            <a (click)="selectStatus('incomplete')" class="btn btn-outline-warning"
+            [class.selected]="selectedStatus === 'incomplete'">Chưa hoàn thành</a>
           </li>
         </ul>
       </div>
@@ -22,10 +42,13 @@
             <a href="" class="btn btn-outline-warning">Toàn bộ</a>
           </li>
           <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+            <a href="" class="btn btn-outline-warning">< 5 </a>
           </li>
           <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+            <a href="" class="btn btn-outline-warning">5 - 10</a>
+          </li>
+          <li>
+            <a href="" class="btn btn-outline-warning">> 10</a>
           </li>
         </ul>
       </div>
@@ -46,28 +69,28 @@
     </div>
     <div class="col-lg-9">
       <h3>Bộ lọc</h3>
-      <div *ngFor="let book of listbooks">
+      <div *ngFor="let book of listBooks">
         <div class="card border-0">
           <div class="book-content" style="border-bottom: 1px solid gray">
             <img
               class="propImg"
-              src="assets/images/1f8ea1af-de33-456d-a6bc-711d9516bb7c.jpg"
+              src="{{book.imageUrl}}"
               alt="images"
             />
             <div class="card-body">
-              <a class="book-name" [routerLink]="['/book-details', book.Id]">{{book.Name}}</a>
+              <a class="book-name" [routerLink]="['/book-details', transferBookTitle(book.bookTitleNormalize)]">{{book.bookTitle}}</a>
               <div class="book-author">
                 <p>
                   <img src="./assets/images/human-icon.svg" alt="human icon" />
-                  <a href="">{{ book.Author }}</a>
+                  <a href="">{{ book.authorName }}</a>
                   <em>|</em>
-                  <span>Số chương</span>
+                  <span>{{book.numberOfChapters}} chương</span>
                   <em>|</em>
-                  <span>Tình trạng</span>
+                  <span>{{showStatusOfBook(book.isCompleted)}}</span>
                 </p>
-                <p><a href="">{{ book.Category }}</a></p>
-                <p>{{ book.Content | slice : 0 : 65 }}</p>
-                <p style="color:#DDDDDD;"><img src="./assets/images/clock-icon.png" alt="clock icon" />00/00/2023</p>
+                <!-- <p *ngFor="let cate of categories"><a href="">{{ cate.categoryName }}</a></p> -->
+                <p>{{ book.bookSummary | slice : 0 : 200 }}</p>
+                <p>Cập nhật: <span style="color:#ccc;">{{book.updatedTime | date:'dd-MM-yyyy HH:mm'}}</span></p>
               </div>
             </div>
           </div>

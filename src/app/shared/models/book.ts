@@ -4,10 +4,11 @@ export interface Book {
     bookTitle: string;
     bookSummary: string;
     imageUrl: string;
-    timeUpload: Uint8Array;
-    timeUpdate: Uint8Array;
+    uploadedTime: Date;
+    updatedTime: Date;
     isApproved: boolean;
     isCompleted: boolean;
+    numberOfChapters: number;
     authorId: number;
     userId: string;
 }
@@ -26,13 +27,10 @@ export interface BookDetail {
     bookTitleNormalize: string;
     bookSummary: string;
     imageUrl: string;
-    timeUpload: Uint8Array;
-    timeUpdate: Uint8Array;
+    uploadedTime: Date;
+    updatedTime: Date;
     isCompleted: boolean;
+    numberOfChapters: number;
     authorId: number;
     authorName: string;
-}
-export interface ApiResponse<T>{
-    message: string;
-    data: T;
 }

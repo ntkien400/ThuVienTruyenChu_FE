@@ -21,7 +21,8 @@
           </button>
         </div>
       </form>         
-      <button class="btn btn-outline-dark">Đăng nhập</button>
+      <button class="btn btn-outline-dark" (click)="openLoginModal()">Đăng nhập</button>
+      <app-login-signin *ngIf="isLoginModalOpen" (closeModalEvent)="closeLoginModal()"></app-login-signin>
     </div>
   </div>
 </nav>
