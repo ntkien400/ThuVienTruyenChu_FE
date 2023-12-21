@@ -4,6 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { AuthenticateResponse } from "../shared/models/authenticate";
 import { ApiResponse } from "../shared/models/apiresponse";
+import { CookieService } from "ngx-cookie-service";
 
 
 @Injectable({
@@ -11,10 +12,13 @@ import { ApiResponse } from "../shared/models/apiresponse";
 })
 export class AuthGuard implements CanActivate  {
 
-  constructor(private router:Router, private jwtHelper: JwtHelperService, private http: HttpClient){}
+  constructor(private router:Router,
+     private jwtHelper: JwtHelperService,
+     private http: HttpClient,
+     private cookiService: CookieService){}
   
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = this.cookiService.get("accessToken");
 
     if (accessToken && !this.jwtHelper.isTokenExpired(accessToken)){
       console.log(this.jwtHelper.decodeToken(accessToken))
@@ -31,7 +35,7 @@ export class AuthGuard implements CanActivate  {
 
   private async tryRefreshingTokens(token: string|null): Promise<boolean> {
 
-    const refreshToken = localStorage.getItem("refreshToken");
+    const refreshToken = this.cookiService.get("refreshToken");
     if (!token || !refreshToken) { 
       return false;
     }
@@ -46,8 +50,8 @@ export class AuthGuard implements CanActivate  {
       });
     });
 
-    localStorage.setItem("accessToken", refreshRes.data.accessToken);
-    localStorage.setItem("refreshToken", refreshRes.data.refreshToken);
+    this.cookiService.set("accessToken", refreshRes.data.accessToken);
+    this.cookiService.set("refreshToken", refreshRes.data.refreshToken);
     isRefreshSuccess = true;
 
     return isRefreshSuccess;

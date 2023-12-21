@@ -39,16 +39,20 @@
         <p>Số chương</p>
         <ul>
           <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+            <a (click)="selectNumberOfChapter('all')"  class="btn btn-outline-warning"
+            [class.selected]="selectedChapter === undefined">Toàn bộ</a>
           </li>
           <li>
-            <a href="" class="btn btn-outline-warning">< 5 </a>
+            <a (click)="selectNumberOfChapter('0-4')" class="btn btn-outline-warning"
+            [class.selected]="selectedChapter === '0-4'">< 5 </a>
           </li>
           <li>
-            <a href="" class="btn btn-outline-warning">5 - 10</a>
+            <a (click)="selectNumberOfChapter('5-10')" class="btn btn-outline-warning"
+            [class.selected]="selectedChapter === '5-10'">5 - 10</a>
           </li>
           <li>
-            <a href="" class="btn btn-outline-warning">> 10</a>
+            <a (click)="selectNumberOfChapter('10')" class="btn btn-outline-warning"
+            [class.selected]="selectedChapter === '10'">> 10</a>
           </li>
         </ul>
       </div>
@@ -56,19 +60,20 @@
         <p>Thể loại</p>
         <ul>
           <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+            <a (click)="selectCategory(undefined)" class="btn btn-outline-warning"
+            [class.selected]="selectedCate === undefined">Toàn bộ</a>
           </li>
-          <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
-          </li>
-          <li>
-            <a href="" class="btn btn-outline-warning">Toàn bộ</a>
+          <li *ngFor="let cate of categories">
+            <a (click)="selectCategory(cate.id)" class="btn btn-outline-warning"
+            [class.selected]="selectedCate === cate.id">{{cate.categoryName}}</a>
           </li>
         </ul>
       </div>
+      <button (click)="loadFilteredBooks()" class="btn btn-success filter" type="submit">Lọc</button>
     </div>
     <div class="col-lg-9">
       <h3>Bộ lọc</h3>
+      <h4 *ngIf="listBooks.length === 0">Không có kết quả</h4>
       <div *ngFor="let book of listBooks">
         <div class="card border-0">
           <div class="book-content" style="border-bottom: 1px solid gray">

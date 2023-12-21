@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BookCard, BookDetail } from '../shared/models/book';
 import { BookCategory } from '../shared/models/bookcategory';
 import { Category } from '../shared/models/category';
@@ -13,6 +13,9 @@ import { ApiResponse } from '../shared/models/apiresponse';
 export class BookService{
     
     private baseUrl = 'https://localhost:7234/api/';
+
+    private selectedCategorySource = new BehaviorSubject<number>(0);
+    selectedCategory$ = this.selectedCategorySource.asObservable();
 
     constructor(private http:HttpClient){
     }
@@ -36,7 +39,7 @@ export class BookService{
         return this.http.get<ApiResponse<Category[]>>(this.baseUrl + `Categories/get-all-category`);
     }
 
-    getFilterBooks(order?: string, status?: string, chapter?: number, cate?: number): Observable<ApiResponse<BookDetail[]>>{
+    getFilterBooks(order?: string, status?: string, chapter?: string, cate?: number): Observable<ApiResponse<BookDetail[]>>{
         let params = new HttpParams();
 
         if(order){
@@ -65,4 +68,8 @@ export class BookService{
     getChapterByBook(bookId: number, chapNumber: number): Observable<ApiResponse<ViewChapter>>{
         return this.http.get<ApiResponse<ViewChapter>>(this.baseUrl + `Chapters/get-chapter-by-book?bookId=${bookId}&chapNumber=${chapNumber}`);
     }
+
+    updateSelectedCategory(categoryId: number) {
+        this.selectedCategorySource.next(categoryId);
+      }
 }

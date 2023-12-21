@@ -28,9 +28,9 @@
             <img src="./assets/images/avatar-icon.png" alt="avatar">
           </div>
           <div class="user-info">
-            <h3>Nguyễn Trung Kiên</h3>
-            <p>Lv1</p>
-            <p>Luyện khí sư</p>
+            <h3>{{userInfo?.fullName}}</h3>
+            <p>Lv{{userInfo?.userLevelId}}</p>
+            <p>{{level?.name}}</p>
           </div>
         </div>
         <div class="user-data2">
@@ -68,7 +68,10 @@
             </form>
           </div>
           <div *ngIf="selectInfo === 'avatar'">
-            <p>Thay đổi avatar</p>
+            <div class="form-group">
+              <label class="col-sm-2" for="email">Hình ảnh:</label>
+              <input class="col-sm-8" type="file" id="book-image" name="book-image" required>
+            </div>  
           </div>
           <div *ngIf="selectInfo === 'password'" class="user-form">
             <form>

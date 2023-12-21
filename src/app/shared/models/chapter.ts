@@ -3,8 +3,8 @@ export interface Chapter{
     chapterNumber: number;
     chapterName: string;
     chapterContent: string;
-    uploadTime: Uint8Array;
-    updateTime: Uint8Array;
+    uploadedTimes: Date;
+    updatedTime: Date;
     bookId: number;
     userId: string;
 }
@@ -14,8 +14,8 @@ export interface ViewChapter{
     chapterNumber: number;
     chapterName: string;
     chapterContent: string;
-    uploadTime: string;
-    updateTime: string;
+    uploadedTimes: string;
+    updatedTime: string;
     bookId: number;
     userName: string;
 }

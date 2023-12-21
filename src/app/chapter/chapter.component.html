@@ -5,10 +5,11 @@
         <h1 style="color: brown;">{{book?.bookTitle}}</h1>
         <p style="color: coral; font-weight: bold;">Chương {{chapter?.chapterNumber}}: {{chapter?.chapterName}}</p>
         <p><strong>Người đăng: </strong>{{chapter?.userName}}</p>
-        <p><strong>Ngày đăng: </strong>{{chapter?.uploadTime}}</p>
+        <p><strong>Ngày đăng: </strong>{{chapter?.uploadedTimes}}</p>
         <div class="chapter-c col-xs-12">
           <div class="max-1000">
             <div class="chapter" [ngStyle]="{'background-color': selectedTheme}">
+              <!-- Control title -->
               <ul class="control">
                 <li class="list-control" [class.active]="showPanel === 'list'" (click)="togglePanel('list')" 
                 [ngStyle]="{'background-color': selectedTheme}">
@@ -22,9 +23,9 @@
                 [ngStyle]="{'background-color': selectedTheme}">
                   <i class="fa-regular fa-comment-dots"></i>
                 </li>
+                <!-- Control content -->
                 <div class="control-content">
                   <div *ngIf="showPanel === 'list'" class="panel-box">
-                    <!-- First Row: Buttons to Change Chapter -->
                     <div class="row">
                       <button class="change-chapter" (click)="changeChapter('prev')">
                         <i class="fa-solid fa-arrow-left-long fa-lg"></i>
@@ -36,12 +37,9 @@
                       </button>
                     </div>
                     <h4>Danh sách chương</h4>
-                    <!-- Second Row: List of Chapters (2 per line) -->
                     <div class="row chapter-list">
                       <div class="chapter-text" *ngFor="let chapter of chapters">
-                        <!-- Display Chapter Information -->
-                        <p>Chương {{ chapter.chapterNumber }}: {{chapter.chapterName}}</p>
-                        <!-- Additional Chapter Details... -->
+                        <a (click)="navigateToChapter(chapter.chapterNumber)">Chương {{ chapter.chapterNumber }}: {{chapter.chapterName}}</a>
                       </div>
                     </div>
                   </div>
@@ -107,10 +105,10 @@
               </div>
             </div>
             <div class="control-bottom">
-              <a class="prev-chapter"><i class="fa-solid fa-arrow-left-long fa-lg"></i> Chương trước
+              <a (click)="changeChapter('prev')" class="prev-chapter"><i class="fa-solid fa-arrow-left-long fa-lg"></i> Chương trước
               </a>
               <span class="cross-line"></span>
-              <a class="next-chapter">Chương sau <i class="fa-solid fa-arrow-right-long fa-lg"></i></a>
+              <a (click)="changeChapter('next')" class="next-chapter">Chương sau <i class="fa-solid fa-arrow-right-long fa-lg"></i></a>
             </div>
             <!--List Comment-->
             <div class="list-comment">

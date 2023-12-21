@@ -70,12 +70,26 @@ export class ChapterComponent implements OnInit {
   }
 
   changeChapter(type: string): void{
-    if(this.book && this.chapter){
-      const bookTitleNormalize = this.book.bookTitleNormalize.replace(/\s+/g, '-');
-    if(type === 'prev'){
-      this.router.navigate(['/book-details/'+ bookTitleNormalize + '/chuong/' + this.chapNumber])
-    }
-    }
+        const chapterNumberString = this.route.snapshot.paramMap.get('chapterNumber');
+        this.bookTitle = this.route.snapshot.paramMap.get('bookTitle');
+        this.chapNumber = Number(chapterNumberString);
+
+        if(type === 'prev' && this.chapNumber &&this.chapNumber >1){
+          this.chapNumber = this.chapNumber -1;
+          console.log('prev');
+        }
+
+        if(type === 'next' && this.chapNumber){
+          this.chapNumber = this.chapNumber +1;
+          console.log('next');
+        }
+        this.router.navigate(['/book-details/'+ this.bookTitle + '/chuong/' + this.chapNumber]);
+     
+  }
+
+  navigateToChapter(chapter: number): void {
+    this.bookTitle = this.route.snapshot.paramMap.get('bookTitle');
+    this.router.navigate(['/book-details/'+ this.bookTitle + '/chuong/' + chapter]);
   }
 
   loadChaptersOfBook(): void{
@@ -106,7 +120,7 @@ export class ChapterComponent implements OnInit {
           if(this.book){
             this.bookService.getChapterByBook(this.book.id, this.chapNumber!).subscribe(response => {
               this.chapter = response.data;
-              this.chapter.uploadTime = this.datePipe.transform(response.data.uploadTime, 'dd-MM-yyyy HH:mm')!;
+              this.chapter.uploadedTimes = this.datePipe.transform(response.data.uploadedTimes, 'dd-MM-yyyy HH:mm')!;
             });
             this.loadCommentsOfBook(this.book.id);
           }

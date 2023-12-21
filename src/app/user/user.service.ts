@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ViewComment } from '../shared/models/usercomment';
 import { ApiResponse } from '../shared/models/apiresponse';
 import { User } from '../shared/models/user';
+import { UserLevel } from '../shared/models/userlevel';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,9 @@ export class UserService {
 
   getUserById(userId: string): Observable<ApiResponse<User>>{
     return this.http.get<ApiResponse<User>>(this.baseUrl + `Users/get-user-by-id?userId=${userId}`);
+  }
+
+  getUserLevelById(levelId: number): Observable<ApiResponse<UserLevel>>{
+    return this.http.get<ApiResponse<UserLevel>>(this.baseUrl + `UserLevels?id=${levelId}`);
   }
 }

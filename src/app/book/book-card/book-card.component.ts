@@ -42,18 +42,14 @@ export class BookCardComponent implements OnInit {
     this.bookCategories.forEach(bookCategory =>{
       this.bookService.getCategoryById(bookCategory.categoryId).subscribe(fullCategory =>{
         this.categories.push(fullCategory.data);
-        //console.log(this.categories);
       })
     })
   }
 
-  // transformBookTitle(bookTitle: string): string {
-  //   const withoutAccents = bookTitle.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  //   const withHyphens = withoutAccents.replace(/\s+/g, '-');
-  //   return withHyphens.toLowerCase();
-  // }
 
   navigateToBookDetail(): void{
-    this.route.navigate(['/book-details/'+ this.bookCard.bookTitleNormalize.replace(/\s+/g, '-')])
+    this.route.navigate(['/book-details/'+ this.bookCard.bookTitleNormalize.replace(/\s+/g, '-')]).then(() => {
+      window.location.reload();
+    });
   }
 }

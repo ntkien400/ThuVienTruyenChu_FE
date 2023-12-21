@@ -182,7 +182,7 @@ button {
   width: 50%; 
   margin-bottom: 10px;
 }
-.chapter-text p {
+.chapter-text a {
   text-align: left;
   padding-left: 10px;
   margin-bottom: 0;

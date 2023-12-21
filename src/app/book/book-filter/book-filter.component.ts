@@ -18,13 +18,17 @@ export class BookFilterComponent implements OnInit {
   
   selectedOrder?: string;
   selectedStatus?: string;
-  selectedChapter?: number;
+  selectedChapter?: string;
   selectedCate?: number;
 
   constructor(private bookService: BookService) { }
 
   ngOnInit() {
+    this.bookService.selectedCategory$.subscribe(category => {
+      this.selectedCate = category;
+    });
     this.loadFilteredBooks();
+    this.loadAllCategories();
   }
 
   showStatusOfBook(status: boolean): string{
@@ -52,43 +56,34 @@ export class BookFilterComponent implements OnInit {
     }
   }
 
-  selectNumberOfChapter(chapter: number){
-    if(chapter != 0){
+  selectNumberOfChapter(chapter: string){
+    if(chapter != 'all'){
       this.selectedChapter = chapter;
     }
-  }
-
-  selectCategory(cate: number){
-    if(cate != 0){
-      this.selectedCate = cate;
+    else{
+      this.selectedChapter = undefined;
     }
   }
 
-  getBookCategoriesByTitle(bookTitle: string): void{
-    this.bookService.getBookCategoriesByTitle(bookTitle)
-      .subscribe(categories => {
-        this.bookCategories = categories.data;
-        console.log(this.bookCategories);
-        this.fetchCategoryName(this.bookCategories);
-      });
+  selectCategory(cate?: number){
+    if(cate != undefined){
+      this.selectedCate = cate;
+    }
+    else{
+      this.selectedCate = undefined;
+    }
   }
 
-  fetchCategoryName(bookCategory: BookCategory[]): void{
-    bookCategory.forEach(bookCategory =>{
-      this.bookService.getCategoryById(bookCategory.categoryId).subscribe(fullCategory =>{
-        this.categories.push(fullCategory.data);
-      })
+  loadAllCategories(): void{
+    this.bookService.getAllCategories().subscribe(response => {
+      this.categories = response.data;
     })
   }
   
-  loadFilteredBooks(order?: string, status?: string, chapter?: number, cate?: number): void{
-    this.bookService.getFilterBooks(order, status, chapter, cate).subscribe(response => {
+  loadFilteredBooks(): void{
+    this.bookService.getFilterBooks(this.selectedOrder, this.selectedStatus, this.selectedChapter, this.selectedCate).subscribe(response => {
       this.listBooks = response.data;
       console.log(this.listBooks);
-
-      if(this.listBooks){
-        forkJoin(this.listBooks.map(book => this.getBookCategoriesByTitle(book.bookTitle)));
-      }
     });
   }
 }

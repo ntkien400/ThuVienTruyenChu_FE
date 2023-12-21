@@ -6,6 +6,7 @@ import { AuthenticateResponse } from '../../models/authenticate';
 import { ApiResponse } from '../../models/apiresponse';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-signin',
@@ -20,7 +21,7 @@ export class LoginSigninComponent implements OnInit {
   invalidLogin = false;
   loginInfo: Login = { username: '', password: '' };
   
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
   }
@@ -38,8 +39,10 @@ export class LoginSigninComponent implements OnInit {
         next:(response:ApiResponse<AuthenticateResponse>) => {
           const accessToken = response.data.accessToken;
           const refreshToken = response.data.refreshToken;
-          localStorage.setItem("accessToken", accessToken);
-          localStorage.setItem("refreshToken", refreshToken);
+
+          this.cookieService.set("accessToken", accessToken);
+          this.cookieService.set("refreshToken", refreshToken);
+
           this.invalidLogin = false;
           this.authService.checkAuthenticate();
           this.closeModal();

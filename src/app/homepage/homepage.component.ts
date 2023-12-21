@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BookCard } from '../shared/models/book';
 import { BookService } from '../book/book.service';
 import { Category } from '../shared/models/category';
+import { AuthService } from '../Authenticate/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -14,7 +16,7 @@ export class HomepageComponent implements OnInit {
   listRecentBookCard: BookCard[] =[];
   listCategories: Category[]= [];
  
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.loadNewBookCard();
@@ -43,4 +45,8 @@ export class HomepageComponent implements OnInit {
     })
   }
 
+  onCategoryClick(categoryId: number) {
+    this.bookService.updateSelectedCategory(categoryId);
+    this.router.navigate(['/book-filter']);
+  }
 }

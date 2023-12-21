@@ -54,6 +54,7 @@ export class BookDetailsComponent implements OnInit {
             this.bookCategories = response.data;
             this.fetchCategoryName();
           })
+          console.log(this.bookDetails.id);
           this.loadBookSameAuthor(this.bookDetails.authorId);
           this.loadChaptersOfBook(this.bookDetails.id);
           this.loadCommentsOfBook(this.bookDetails.id);

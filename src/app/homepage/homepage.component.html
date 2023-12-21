@@ -5,7 +5,7 @@
       <div class="category">
         <ul class="category-list">
           <li *ngFor="let category of listCategories; let i = index" [class.even]="i % 4 === 0 || i % 4 === 1">
-            {{category.categoryName}}
+            <a (click)="onCategoryClick(category.id)">{{category.categoryName}}</a>
           </li>
         </ul>
       </div>
@@ -21,7 +21,7 @@
       <div class="news"> <!-- News -->
         <ul>
           <li *ngFor="let book of listRecentBookCard; let i = index" [class.even]="i % 2 === 0">
-            {{book.bookTitle}}
+            {{i+1}}. {{book.bookTitle}}
           </li>
         </ul>
       </div>
